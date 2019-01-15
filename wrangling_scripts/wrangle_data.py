@@ -1,6 +1,8 @@
 import pandas as pd
 import plotly.graph_objs as go
 
+# TODO: Scroll down to line 157 and set up a fifth visualization for the data dashboard
+
 def cleandata(dataset, keepcolumns = ['Country Name', '1990', '2015'], value_variables = ['1990', '2015']):
     """Clean world bank data for a visualizaiton dashboard
 
@@ -152,12 +154,42 @@ def return_figures():
                 xaxis = dict(title = 'Rural Population'),
                 yaxis = dict(title = 'Forest Area (square km)'),
                 )
+
+    # TODO: Make a fifth chart from the data in API_SP.RUR.TOTL_DS2_en_csv_v2_9914824.csv
+    # This csv file contains data about the total rural population for various countries over many years
+    # Make a bar chart showing the rural population of these countries ['United States', 'China', 'Japan', 'Germany', 'United Kingdom', 'India', 'France', 'Brazil', 'Italy', 'Canada'] in the year 2015.
+    df = cleandata("data/API_SP.RUR.TOTL_DS2_en_csv_v2_9914824.csv", keepcolumns = ['Country Name', '2015'], value_variables = ['2015'])
+    graph_five = []
+    # HINT: you can use the clean_data() function. You'll need to specify the path to the csv file, and which columns you want to keep. The chart 2 code might help with understanding how to code this.
+    # TODO: once the data is clean, make a list called graph_five and append the plotly graph to this list.
+    x_val = list()
+    y_val = list()
+    for country in countrylist:
+        x_val.append(df[df['country'] == country].country.tolist()[0])
+        y_val.append(df[df['country'] == country].variable.tolist()[0])
+        # print(df[df['country'] == country].country.tolist()[0], df[df['country'] == country].variable.tolist()[0])
     
+    graph_five.append(
+        go.Bar(
+            x = x_val,
+            y = y_val
+        )
+    )
+    
+    # TODO: fill a layout variable for the fifth visualization
+    layout_five = dict(
+        title = 'Country versus Rural Population in 2015',
+        xaxis = dict(title = 'Country'),
+        yaxis = dict(title = 'Rural population'),
+    )
     # append all charts to the figures list
     figures = []
     figures.append(dict(data=graph_one, layout=layout_one))
     figures.append(dict(data=graph_two, layout=layout_two))
     figures.append(dict(data=graph_three, layout=layout_three))
     figures.append(dict(data=graph_four, layout=layout_four))
-
+    figures.append(dict(data=graph_five, layout=layout_five))
+    
+    # TODO: append the figure five information to the figures list
+    
     return figures

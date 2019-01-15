@@ -1,7 +1,3 @@
-<!DOCTYPE html>
-
-<html>
-
 <head>
 
 <title>World Bank Data Dashboard</title>
@@ -45,10 +41,10 @@
     <!--social media buttons column-->      
     <div class="col-1 border-right">
         <div id="follow-me" class="mt-3">
-            <a href="https://www.linkedin.com/in/qian-liu-098564b7/">
+            <a href="#">
                 <img src="/static/img/linkedinlogo.png" alt="linkedin" class="img-fluid mb-4 ml-2">
             </a>
-            <a href="https://github.com/nyxcat">
+            <a href="#">
                 <img src="/static/img/githublogo.png" alt="github" class="img-fluid ml-2">
             </a>
         </div>
@@ -79,7 +75,7 @@
             </div>
 
             <!--bottom two charts-->        
-            <div class="row mb-6">
+            <div class="row">
                 <div class="col-6"> 
                     <div id="chart3">
                         <div id="{{ids[2]}}"></div>
@@ -89,11 +85,20 @@
                     <div id="chart4">
                         <div id="{{ids[3]}}"></div>
                     </div>
-                <div>
+                </div>
+            </div>
+           
+            <!--TODO: Create another row and place a fifth chart in that row-->        
+            <div class="row mb-5">
+                <div class="col-6"> 
+                    <div id="chart5">
+                        <div id="{{ids[4]}}"></div>
+                    </div>
+                </div>
+              
             </div>
         
-        </div>
-    <div>
+    </div>
 </div>
 
 <!--footer section-->               
@@ -106,7 +111,7 @@
 
     <script type="text/javascript">
         // plots the figure with id
-        // id much match the div id above in the html
+        // id must match the div id above in the html
         var figures = {{figuresJSON | safe}};
         var ids = {{ids | safe}};
         for(var i in figures) {
